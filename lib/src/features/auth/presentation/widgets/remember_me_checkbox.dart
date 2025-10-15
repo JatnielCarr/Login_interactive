@@ -16,12 +16,13 @@ class RememberMeCheckbox extends StatelessWidget {
       },
       builder: (context, state) {
         final isLoading = state is LoginLoading;
+        final disabledColor = Theme.of(context).disabledColor;
 
         return CheckboxListTile(
           title: Text(
             'Remember Me',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: isLoading ? Colors.grey.shade400 : null,
+                  color: isLoading ? disabledColor : null,
                 ),
           ),
           value: state.isRememberMeChecked,
@@ -33,7 +34,7 @@ class RememberMeCheckbox extends StatelessWidget {
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,
           activeColor: isLoading
-              ? Colors.grey.shade400
+              ? disabledColor
               : Theme.of(context).colorScheme.primary,
         );
       },

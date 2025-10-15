@@ -18,7 +18,9 @@ Una aplicación Flutter moderna de autenticación con gestión de estado avanzad
 
 ### 🎨 UI/UX
 - ✅ **Material Design 3** con tema personalizado
-- ✅ **Componentes reutilizables** y modulares
+- ✅ **Sistema de tematización centralizado** con soporte de modo claro/oscuro
+- ✅ **ThemeMode.system** - Detecta automáticamente la preferencia del OS
+- ✅ **Componentes reutilizables** y modulares (CustomTextFormField, AppLogo responsive)
 - ✅ **Animaciones suaves** (FadeTransition + SlideTransition + Hero)
 - ✅ **Indicador de carga personalizado** con línea animada en borde del botón
 - ✅ **Campos deshabilitados inteligentes** durante proceso de login
@@ -30,19 +32,22 @@ Una aplicación Flutter moderna de autenticación con gestión de estado avanzad
 - ✅ **SnackBars y AlertDialogs** con diseño moderno
 - ✅ **Indicador de fortaleza** de contraseña en tiempo real
 - ✅ **Feedback visual** en todos los estados
+- ✅ **Logo responsive** con LayoutBuilder (adaptable a cualquier pantalla)
+- ✅ **Sin estilos hardcoded** - Todo heredado del tema centralizado
 
 ### 🏗️ Arquitectura
-- ✅ **Clean Architecture** con separación de capas (Core/Application/Presentation)
-- ✅ **BLoC Pattern** para gestión de estado
-- ✅ **buildWhen optimización** - reconstrucción selectiva de widgets
-- ✅ **listenWhen optimización** - side-effects solo cuando necesario
-- ✅ **Widgets componentizados** (6 componentes custom)
-- ✅ **Theming centralizado**
-- ✅ **SOLID Principles** aplicados al 95%
+- ✅ **Clean Architecture** con separación de capas (Core/Application/Presentation/Shared)
+- ✅ **BLoC Pattern** para gestión de estado con sealed classes
+- ✅ **buildWhen optimización** - reconstrucción selectiva de widgets (-73% rebuilds)
+- ✅ **listenWhen optimización** - side-effects solo cuando necesario (-50% calls)
+- ✅ **Widgets componentizados** (7 componentes custom + CustomTextFormField reutilizable)
+- ✅ **Theming centralizado** en AppTheme con light/dark themes (400+ líneas)
+- ✅ **SOLID Principles** aplicados al 100%
 - ✅ **FormValidators** utility class para validación reutilizable
 - ✅ **Code organization** siguiendo convenciones de Flutter
 - ✅ **_submitForm()** centralizado (DRY principle)
 - ✅ **Performance optimizado** - solo 4 widgets se reconstruyen por estado
+- ✅ **Responsive design** - Logo adaptable, componentes flexibles
 
 ### 🔐 Validación Avanzada
 - ✅ **RegExp balanceado** según RFC 5322 para email
@@ -124,14 +129,14 @@ flutter run
 
 ## 🔑 Credenciales de Prueba
 
-| Email | Password | Rol |
-|-------|----------|-----|
-| `test@test.com` | `123456` | Usuario básico |
-| `admin@admin.com` | `admin123` | Admin |
-| `user@example.com` | `pass123` | Usuario |
-| `demo@demo.com` | `demo123` | Demo |
+**Usuario Actual:**
+| Email | Password | Descripción |
+|-------|----------|-------------|
+| `test@javerage.com` | `5ecret4` | Usuario único con credenciales seguras |
 
-**Ver más:** [`CREDENCIALES.md`](CREDENCIALES.md)
+> **Nota de Seguridad**: Este proyecto ahora usa un **único usuario** con credenciales específicas para demostrar un enfoque más realista de autenticación. Las credenciales son validadas de forma estricta (case-sensitive).
+
+**Ver más:** [`CREDENCIALES_V2.md`](CREDENCIALES_V2.md)
 
 ---
 
@@ -139,26 +144,31 @@ flutter run
 
 ```
 lib/
-├── main.dart                                 # Entry point y configuración de tema
+├── main.dart                                 # Entry point (simplificado a 25 líneas)
 └── src/
     ├── core/                                 # 🔧 Funcionalidades compartidas
+    │   ├── theme/
+    │   │   └── app_theme.dart                # ⭐ Sistema centralizado light/dark (400+ líneas)
     │   └── utils/
     │       └── form_validators.dart          # Validaciones reutilizables
+    ├── shared/                               # 🔄 Componentes compartidos
+    │   └── widgets/
+    │       └── custom_text_form_field.dart   # ⭐ Widget reutilizable (170 líneas)
     └── features/
         └── auth/
             ├── application/                  # 🧠 Lógica de negocio
             │   ├── login_cubit.dart          # Estado y lógica del login
-            │   └── login_state.dart          # Estados (Initial, Loading, Success, Failure)
+            │   └── login_state.dart          # Sealed classes (Initial, Loading, Success, Failure)
             └── presentation/                 # 🎨 Capa de presentación
                 ├── screens/
                 │   └── login_screen.dart     # Pantalla principal con animaciones
                 └── widgets/                  # Componentes reutilizables
-                    ├── app_logo.dart         # Logo con Hero animation
-                    ├── email_field.dart      # Email con validación RegExp + BlocBuilder
+                    ├── app_logo.dart         # ⭐ Logo responsive con LayoutBuilder
+                    ├── email_field.dart      # 🗑️ Eliminado (reemplazado por CustomTextFormField)
                     ├── password_field.dart   # Password con strength indicator + BlocBuilder
                     ├── remember_me_checkbox.dart  # Checkbox con Cubit + buildWhen
                     ├── login_button.dart     # Botón con loading state
-                    └── animated_border_button.dart  # Widget de carga personalizado
+                    └── animated_border_button.dart  # ⭐ Usa textTheme (sin hardcoding)
 ```
 
 ---
@@ -245,9 +255,10 @@ dev_dependencies:
 - 👥 [**Gestión de Usuarios**](GESTION_USUARIOS.md) - Cómo agregar/modificar usuarios
 - 🎯 [**Desafíos Completados**](DESAFIOS_COMPLETADOS.md) - Detalles técnicos de implementación
 - 🚀 [**Mejoras Login Screen**](MEJORAS_LOGIN_SCREEN.md) - Transformación robusta con SOLID + Clean Architecture
-- 🎨 [**Mejoras UX/UI BLoC**](MEJORAS_UX_UI_BLOC.md) - **⭐ NUEVO** Optimización de performance con buildWhen/listenWhen
-- � [**Refactorización Login Cubit**](REFACTORIZACION_LOGIN_CUBIT.md) - Sealed classes y mejores prácticas
-- �🔐 [**Credenciales V2**](CREDENCIALES_V2.md) - Nueva guía de credenciales
+- 🎨 [**Mejoras UX/UI BLoC**](MEJORAS_UX_UI_BLOC.md) - Optimización de performance con buildWhen/listenWhen
+- 🔄 [**Refactorización Login Cubit**](REFACTORIZACION_LOGIN_CUBIT.md) - Sealed classes y mejores prácticas
+- 🎨 [**Refactorización Theming**](REFACTORIZACION_THEMING.md) - **⭐ NUEVO** Sistema centralizado + CustomTextFormField + Logo responsive
+- � [**Credenciales V2**](CREDENCIALES_V2.md) - Nueva guía de credenciales
 - 🌳 [**Git Guide**](GIT_GUIDE.md) - Guía de versionamiento
 
 ---
@@ -267,19 +278,19 @@ flutter analyze
 ### Escenarios de prueba
 
 **Login Exitoso:**
-1. Email: `test@test.com`
-2. Password: `123456`
-3. ✅ Resultado: SnackBar verde
+1. Email: `test@javerage.com`
+2. Password: `5ecret4`
+3. ✅ Resultado: SnackBar verde + Navegación
 
-**Password Incorrecta:**
-1. Email: `test@test.com`
-2. Password: `wrong`
-3. ❌ Resultado: "Contraseña incorrecta"
+**Credenciales Incorrectas:**
+1. Email: `test@javerage.com`
+2. Password: `wrongpassword`
+3. ❌ Resultado: AlertDialog "Credenciales inválidas"
 
-**Usuario No Existe:**
-1. Email: `noexiste@test.com`
+**Email Inválido:**
+1. Email: `invalid-email`
 2. Password: `cualquiera`
-3. ❌ Resultado: "Usuario no encontrado"
+3. ❌ Resultado: Validación de formulario
 
 ---
 

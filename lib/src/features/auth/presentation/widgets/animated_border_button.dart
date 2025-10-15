@@ -66,6 +66,7 @@ class _AnimatedBorderButtonState extends State<AnimatedBorderButton>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
 
     return SizedBox(
       width: double.infinity,
@@ -96,10 +97,10 @@ class _AnimatedBorderButtonState extends State<AnimatedBorderButton>
                   ? const SizedBox.shrink() // Espacio vacío durante carga
                   : Text(
                       widget.text,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.2,
+                        color: colorScheme.onPrimary,
                       ),
                     ),
             ),
@@ -125,8 +126,7 @@ class _AnimatedBorderButtonState extends State<AnimatedBorderButton>
             Center(
               child: Text(
                 'Loading...',
-                style: TextStyle(
-                  fontSize: 16,
+                style: textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.2,
                   color: colorScheme.onPrimary,

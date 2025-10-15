@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/form_validators.dart';
+import '../../../../shared/widgets/custom_text_form_field.dart';
 import '../../application/login_cubit.dart';
 import '../../application/login_state.dart';
 import '../widgets/app_logo.dart';
-import '../widgets/email_field.dart';
 import '../widgets/password_field.dart';
 import '../widgets/remember_me_checkbox.dart';
 import '../widgets/login_button.dart';
@@ -237,8 +238,8 @@ class _LoginFormState extends State<LoginForm> with TickerProviderStateMixin {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  // Logo con animación Hero
-                  const Center(child: AppLogo(size: 180)),
+                  // Logo con animación Hero y tamaño responsive
+                  const Center(child: AppLogo()),
                   const SizedBox(height: 40),
                   // Título
                   Text(
@@ -253,17 +254,34 @@ class _LoginFormState extends State<LoginForm> with TickerProviderStateMixin {
                   Text(
                     'Sign in to continue',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey[600],
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
                   // Campo de Email con gestión de foco mejorada
-                  EmailField(
-                    controller: _emailController,
-                    focusNode: _emailFocusNode,
-                    autofocus: true,
-                    onFieldSubmitted: _onEmailFieldSubmitted,
+                  BlocBuilder<LoginCubit, LoginState>(
+                    buildWhen: (previous, current) {
+                      return previous.runtimeType != current.runtimeType;
+                    },
+                    builder: (context, state) {
+                      final isLoading = state is LoginLoading;
+                      
+                      return CustomTextFormField(
+                        controller: _emailController,
+                        focusNode: _emailFocusNode,
+                        labelText: 'Email Address',
+                        hintText: 'example@domain.com',
+                        helperText: 'We\'ll never share your email',
+                        prefixIcon: Icons.email_outlined,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        autofocus: true,
+                        enabled: !isLoading,
+                        validator: FormValidators.validateEmail,
+                        onFieldSubmitted: _onEmailFieldSubmitted,
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   // Campo de Contraseña con indicador de fortaleza
