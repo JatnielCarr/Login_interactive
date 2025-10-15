@@ -1,5 +1,5 @@
 // In lib/src/features/auth/application/login_state.dart
-abstract class LoginState {
+sealed class LoginState {
   final bool isRememberMeChecked;
   
   const LoginState({this.isRememberMeChecked = false});

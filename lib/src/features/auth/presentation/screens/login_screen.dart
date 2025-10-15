@@ -167,8 +167,22 @@ class _LoginFormState extends State<LoginForm> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
+      // Solo escuchar cuando cambie a Success o Failure
+      listenWhen: (previous, current) {
+        return current is LoginSuccess || current is LoginFailure;
+      },
       listener: (context, state) {
         if (state is LoginSuccess) {
+          // Limpiar los TextEditingControllers
+          _emailController.clear();
+          _passwordController.clear();
+          
+          // Resetear validación automática
+          setState(() {
+            _autovalidateMode = AutovalidateMode.disabled;
+          });
+          
+          // Mostrar SnackBar de éxito
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: const Row(
@@ -186,22 +200,26 @@ class _LoginFormState extends State<LoginForm> with TickerProviderStateMixin {
               duration: const Duration(seconds: 3),
             ),
           );
+          
+          // TODO: Navegar a la pantalla principal
         } else if (state is LoginFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Row(
-                children: [
-                  const Icon(Icons.error_outline, color: Colors.white),
-                  const SizedBox(width: 12),
-                  Expanded(child: Text(state.error)),
-                ],
+          // Mostrar AlertDialog de error
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              icon: const Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 48,
               ),
-              backgroundColor: Colors.red,
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              duration: const Duration(seconds: 4),
+              title: const Text('Error de Autenticación'),
+              content: Text(state.error),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Aceptar'),
+                ),
+              ],
             ),
           );
         }

@@ -20,23 +20,29 @@ Una aplicación Flutter moderna de autenticación con gestión de estado avanzad
 - ✅ **Material Design 3** con tema personalizado
 - ✅ **Componentes reutilizables** y modulares
 - ✅ **Animaciones suaves** (FadeTransition + SlideTransition + Hero)
+- ✅ **Indicador de carga personalizado** con línea animada en borde del botón
+- ✅ **Campos deshabilitados inteligentes** durante proceso de login
 - ✅ **Mensajes de error** contextuales y específicos
 - ✅ **Gestión del foco** automática con FocusNode
 - ✅ **TextInputAction** configurado (Next/Done) para flujo de teclado
 - ✅ **onFieldSubmitted** para navegación automática entre campos
-- ✅ **Loading states** con spinner integrado
-- ✅ **SnackBars** con íconos y diseño moderno
+- ✅ **Loading states** con AnimationController y CustomPainter
+- ✅ **SnackBars y AlertDialogs** con diseño moderno
 - ✅ **Indicador de fortaleza** de contraseña en tiempo real
+- ✅ **Feedback visual** en todos los estados
 
 ### 🏗️ Arquitectura
 - ✅ **Clean Architecture** con separación de capas (Core/Application/Presentation)
 - ✅ **BLoC Pattern** para gestión de estado
-- ✅ **Widgets componentizados** (5 componentes custom)
+- ✅ **buildWhen optimización** - reconstrucción selectiva de widgets
+- ✅ **listenWhen optimización** - side-effects solo cuando necesario
+- ✅ **Widgets componentizados** (6 componentes custom)
 - ✅ **Theming centralizado**
 - ✅ **SOLID Principles** aplicados al 95%
 - ✅ **FormValidators** utility class para validación reutilizable
 - ✅ **Code organization** siguiendo convenciones de Flutter
 - ✅ **_submitForm()** centralizado (DRY principle)
+- ✅ **Performance optimizado** - solo 4 widgets se reconstruyen por estado
 
 ### 🔐 Validación Avanzada
 - ✅ **RegExp balanceado** según RFC 5322 para email
@@ -148,10 +154,11 @@ lib/
                 │   └── login_screen.dart     # Pantalla principal con animaciones
                 └── widgets/                  # Componentes reutilizables
                     ├── app_logo.dart         # Logo con Hero animation
-                    ├── email_field.dart      # Email con validación RegExp
-                    ├── password_field.dart   # Password con strength indicator
-                    ├── remember_me_checkbox.dart  # Checkbox con Cubit
-                    └── login_button.dart     # Botón con loading state
+                    ├── email_field.dart      # Email con validación RegExp + BlocBuilder
+                    ├── password_field.dart   # Password con strength indicator + BlocBuilder
+                    ├── remember_me_checkbox.dart  # Checkbox con Cubit + buildWhen
+                    ├── login_button.dart     # Botón con loading state
+                    └── animated_border_button.dart  # Widget de carga personalizado
 ```
 
 ---
@@ -237,8 +244,10 @@ dev_dependencies:
 - 📖 [**Guía de Uso**](GUIA_USO.md) - Instrucciones detalladas de uso
 - 👥 [**Gestión de Usuarios**](GESTION_USUARIOS.md) - Cómo agregar/modificar usuarios
 - 🎯 [**Desafíos Completados**](DESAFIOS_COMPLETADOS.md) - Detalles técnicos de implementación
-- � [**Mejoras Login Screen**](MEJORAS_LOGIN_SCREEN.md) - **⭐ NUEVO** Transformación robusta con SOLID + Clean Architecture
-- �🔐 [**Credenciales**](CREDENCIALES.md) - Lista de usuarios disponibles
+- 🚀 [**Mejoras Login Screen**](MEJORAS_LOGIN_SCREEN.md) - Transformación robusta con SOLID + Clean Architecture
+- 🎨 [**Mejoras UX/UI BLoC**](MEJORAS_UX_UI_BLOC.md) - **⭐ NUEVO** Optimización de performance con buildWhen/listenWhen
+- � [**Refactorización Login Cubit**](REFACTORIZACION_LOGIN_CUBIT.md) - Sealed classes y mejores prácticas
+- �🔐 [**Credenciales V2**](CREDENCIALES_V2.md) - Nueva guía de credenciales
 - 🌳 [**Git Guide**](GIT_GUIDE.md) - Guía de versionamiento
 
 ---

@@ -15,14 +15,10 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  // Mapa de usuarios válidos para demostración
+  // Credenciales válidas para demostración
   // En producción, esto vendría de una API/base de datos
-  static final Map<String, String> _validUsers = {
-    'test@test.com': '123456',
-    'admin@admin.com': 'admin123',
-    'user@example.com': 'pass123',
-    'demo@demo.com': 'demo123',
-  };
+  static const String _validEmail = 'test@javerage.com';
+  static const String _validPassword = '5ecret4';
 
   Future<void> login(String email, String password) async {
     emit(LoginLoading(isRememberMeChecked: state.isRememberMeChecked));
@@ -31,18 +27,13 @@ class LoginCubit extends Cubit<LoginState> {
       // Simulamos una llamada a una API
       await Future.delayed(const Duration(seconds: 2));
       
-      // Validación con múltiples usuarios
+      // Validación de credenciales
       // En una app real, aquí harías la llamada a tu backend
-      if (_validUsers.containsKey(email) && _validUsers[email] == password) {
+      if (email == _validEmail && password == _validPassword) {
         emit(LoginSuccess(isRememberMeChecked: state.isRememberMeChecked));
-      } else if (_validUsers.containsKey(email)) {
-        emit(LoginFailure(
-          'Contraseña incorrecta',
-          isRememberMeChecked: state.isRememberMeChecked,
-        ));
       } else {
         emit(LoginFailure(
-          'Usuario no encontrado',
+          'Credenciales inválidas. Inténtalo de nuevo.',
           isRememberMeChecked: state.isRememberMeChecked,
         ));
       }
