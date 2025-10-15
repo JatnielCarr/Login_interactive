@@ -1,0 +1,204 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+/coverage/
+lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Android related
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+*.jks
+*.keystore
+
+# iOS/XCode related
+**/ios/**/*.mode1v3
+**/ios/**/*.mode2v3
+**/ios/**/*.moved-aside
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/**/*sync/
+**/ios/**/.sconsign.dblite
+**/ios/**/.tags*
+**/ios/**/.vagrant/
+**/ios/**/DerivedData/
+**/ios/**/Icon?
+**/ios/**/Pods/
+**/ios/**/.symlinks/
+**/ios/**/profile
+**/ios/**/xcuserdata
+**/ios/.generated/
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+
+# macOS
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Flutter/ephemeral
+
+# Windows
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/flutter/generated_plugin_registrant.h
+**/windows/flutter/generated_plugins.cmake
+
+# Linux
+**/linux/flutter/generated_plugin_registrant.cc
+**/linux/flutter/generated_plugin_registrant.h
+**/linux/flutter/generated_plugins.cmake
+
+# Web
+**/web/flutter_service_worker.js
+
+# Exceptions to above rules (keep these)
+!**/ios/**/default.mode1v3
+!**/ios/**/default.mode2v3
+!**/ios/**/default.pbxuser
+!**/ios/**/default.perspectivev3
+
+# Firebase (si lo usas en el futuro)
+**/google-services.json
+**/GoogleService-Info.plist
+firebase_options.dart
+.firebase/
+
+# Environment variables y configuración sensible
+.env
+.env.*
+*.env
+config.json
+secrets.json
+
+# Credenciales y API keys (IMPORTANTE PARA PRODUCCIÓN)
+# Descomenta si guardas credenciales en archivos
+# **/lib/config/credentials.dart
+# **/lib/config/api_keys.dart
+
+# Archivos de backup del editor
+*~
+*.swp
+*.swo
+*.swn
+*.bak
+*.orig
+
+# Archivos de sistema
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Logs y crash reports
+*.log
+crash-reports/
+error-logs/
+
+# Documentación generada
+/doc/api/
+/docs/_build/
+
+# Dependencias de Node (si usas para Firebase Functions, etc.)
+**/node_modules/
+**/package-lock.json
+**/yarn.lock
+
+# Testing
+/test/coverage/
+coverage/
+*.lcov
+
+# Bases de datos locales (si implementas SQLite)
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos temporales de Flutter
+.flutter-plugins-dependencies
+.metadata
+
+# Editor config
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# Gradle temporary files
+.gradle/
+
+# Cache de Dart
+.dart_tool/package_config.json
+
+# FVM (Flutter Version Management)
+.fvm/
+.fvm/flutter_sdk
+
+# Mason (code generation tool)
+.mason/
+
+# Generated files (codegen)
+*.g.dart
+*.freezed.dart
+*.gr.dart
+*.config.dart
+
+# L10n generated files
+**/l10n/*.dart
+!**/l10n/intl_*.arb
+
+# Analysis Options override (personal preferences)
+#analysis_options_personal.yaml
